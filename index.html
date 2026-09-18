@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Animal Rescue and Reporting System</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <nav class="navbar">
+      <a href="#home" class="brand">
+        <span class="brand-icon">AR</span>
+        <span>
+          <strong>Animal Rescue</strong>
+          <small>NGO Support System</small>
+        </span>
+      </a>
+      <button class="menu-btn" id="menuBtn">Menu</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#home">Home</a>
+        <a href="#report">Report Animal</a>
+        <a href="#track">Track Status</a>
+        <a href="#volunteer">Volunteer</a>
+        <a href="#admin">Admin</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-content">
+        <p class="badge">Rural NGO Website Prototype</p>
+        <h1>Report injured animals and help NGOs respond faster.</h1>
+        <p class="hero-text">
+          A simple platform where villagers and volunteers can report injured, sick,
+          or abandoned animals with photo, location, animal type, and description.
+        </p>
+        <div class="hero-actions">
+          <a href="#report" class="btn primary">Report Animal</a>
+          <a href="#volunteer" class="btn secondary">Become Volunteer</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="status-card active">
+          <span>1</span>
+          <div>
+            <strong>Report</strong>
+            <p>Photo + location + condition</p>
+          </div>
+        </div>
+        <div class="status-card">
+          <span>2</span>
+          <div>
+            <strong>Verify</strong>
+            <p>NGO checks the case</p>
+          </div>
+        </div>
+        <div class="status-card">
+          <span>3</span>
+          <div>
+            <strong>Rescue</strong>
+            <p>Volunteer or team helps</p>
+          </div>
+        </div>
+        <div class="status-card">
+          <span>4</span>
+          <div>
+            <strong>Close</strong>
+            <p>Status updated and saved</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats section">
+      <div class="stat-box">
+        <strong id="totalReports">0</strong>
+        <span>Total Reports</span>
+      </div>
+      <div class="stat-box">
+        <strong id="openCases">0</strong>
+        <span>Open Cases</span>
+      </div>
+      <div class="stat-box">
+        <strong id="closedCases">0</strong>
+        <span>Closed Cases</span>
+      </div>
+      <div class="stat-box">
+        <strong id="volunteerCount">0</strong>
+        <span>Volunteers</span>
+      </div>
+    </section>
+
+    <section class="section two-column" id="report">
+      <div>
+        <p class="section-label">User Side</p>
+        <h2>Report Injured Animal</h2>
+        <p class="muted">
+          Fill this form when you find an injured, sick, or abandoned animal.
+          The report will be visible in the NGO admin dashboard.
+        </p>
+      </div>
+
+      <form class="card form" id="reportForm">
+        <div class="form-row">
+          <label>
+            Reporter Name
+            <input type="text" id="reporterName" placeholder="Enter your name" required />
+          </label>
+          <label>
+            Mobile Number
+            <input type="tel" id="mobile" placeholder="Enter mobile number" required />
+          </label>
+        </div>
+
+        <div class="form-row">
+          <label>
+            Animal Type
+            <select id="animalType" required>
+              <option value="">Select animal</option>
+              <option>Dog</option>
+              <option>Puppy</option>
+              <option>Cow</option>
+              <option>Cat</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>
+            Condition
+            <select id="condition" required>
+              <option value="">Select condition</option>
+              <option>Injured</option>
+              <option>Sick</option>
+              <option>Abandoned</option>
+              <option>Needs Food</option>
+              <option>Emergency</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Location
+          <div class="location-row">
+            <input type="text" id="location" placeholder="Area, village, landmark" required />
+            <button type="button" class="btn small" id="detectLocation">Use GPS</button>
+          </div>
+        </label>
+
+        <label>
+          Upload Photo
+          <input type="file" id="animalPhoto" accept="image/*" />
+        </label>
+        <div class="preview" id="photoPreview">Photo preview will appear here</div>
+
+        <label>
+          Description
+          <textarea id="description" rows="4" placeholder="Describe the animal condition and exact place" required></textarea>
+        </label>
+
+        <label class="checkbox">
+          <input type="checkbox" id="selfVolunteer" />
+          I can help as a self-volunteer for this case
+        </label>
+
+        <button class="btn primary full" type="submit">Submit Report</button>
+        <p class="success-msg" id="reportSuccess"></p>
+      </form>
+    </section>
+
+    <section class="section" id="track">
+      <p class="section-label">Status Tracking</p>
+      <h2>Track Rescue Status</h2>
+      <p class="muted">Search your report using report ID or animal type.</p>
+      <div class="search-box">
+        <input type="text" id="trackSearch" placeholder="Example: AR-1001 or Dog" />
+        <button class="btn secondary" id="clearSearch">Clear</button>
+      </div>
+      <div class="report-grid" id="trackList"></div>
+    </section>
+
+    <section class="section two-column" id="volunteer">
+      <div>
+        <p class="section-label">Volunteer Side</p>
+        <h2>Become a Volunteer</h2>
+        <p class="muted">
+          Volunteers can help in animal feeding, rescue support, transportation,
+          cleanliness drives, and awareness activities.
+        </p>
+      </div>
+
+      <form class="card form" id="volunteerForm">
+        <label>
+          Full Name
+          <input type="text" id="volName" placeholder="Enter your full name" required />
+        </label>
+        <div class="form-row">
+          <label>
+            Mobile Number
+            <input type="tel" id="volMobile" placeholder="Enter mobile number" required />
+          </label>
+          <label>
+            Area
+            <input type="text" id="volArea" placeholder="Your area/village" required />
+          </label>
+        </div>
+        <label>
+          Available For
+          <select id="volRole" required>
+            <option value="">Select role</option>
+            <option>Animal Rescue</option>
+            <option>Animal Feeding</option>
+            <option>Transport Help</option>
+            <option>Medical Support Coordination</option>
+            <option>Awareness Poster Work</option>
+          </select>
+        </label>
+        <button class="btn primary full" type="submit">Register as Volunteer</button>
+        <p class="success-msg" id="volunteerSuccess"></p>
+      </form>
+    </section>
+
+    <section class="section admin-section" id="admin">
+      <div class="admin-heading">
+        <div>
+          <p class="section-label">NGO Side</p>
+          <h2>Admin Dashboard</h2>
+          <p class="muted">NGO can verify reports, assign volunteers, and update case status.</p>
+        </div>
+        <button class="btn danger" id="resetDemo">Reset Demo Data</button>
+      </div>
+      <div class="admin-table-wrap card">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Report ID</th>
+              <th>Animal</th>
+              <th>Condition</th>
+              <th>Location</th>
+              <th>Status</th>
+              <th>Volunteer</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="adminTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Animal Rescue and Reporting System Prototype | Rural NGO Support</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
